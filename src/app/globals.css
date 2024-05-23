@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --preto: #434344;
+}
+
+#banner{
+    background-image: url('/banner.avif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
