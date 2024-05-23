@@ -35,14 +35,12 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
                 (snapshot) => {
                     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     setProgress(progress)
-                    console.log(progress)
                 },
                 (error) => {
                     // Handle unsuccessful uploads
                 },
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        console.log('File available at', downloadURL);
                         setImgUrl(downloadURL)
                     });
                 }
