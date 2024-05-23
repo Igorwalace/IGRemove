@@ -2,7 +2,7 @@
 import React from 'react'
 
 //fonts
-import { lilita_one } from '../layout'
+import { lilita_one } from '@/fonts/page'
 
 const Header = () => {
     return (

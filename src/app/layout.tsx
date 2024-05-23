@@ -2,13 +2,11 @@
 import type { Metadata } from "next";
 
 //fonts
-import { Poppins, Lilita_One } from "next/font/google";
+import { poppins } from "@/fonts/page";
 
 //css
 import "./globals.css";
 
-const poppins = Poppins({ subsets: ["latin"], weight: '400' });
-export const lilita_one = Lilita_One({ subsets: ["latin"], weight: '400' });
 
 export const metadata: Metadata = {
   title: "IGRemove",
