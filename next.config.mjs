@@ -10,9 +10,8 @@ const nextConfig = {
         ],
     },
     env: {
-        USE_ENV_FILE: true,
-        API_KEY: process.env.API_KEY,
-        API_ID: process.env.API_ID,
+        REACT_APP_API_KEY: process.env.REACT_APP_API_KEY,
+        REACT_APP_APP_ID: process.env.REACT_APP_APP_ID,
     },
 };
 
