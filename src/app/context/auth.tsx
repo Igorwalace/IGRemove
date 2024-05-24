@@ -15,11 +15,12 @@ export const AppContextFirebaseAuth = createContext<any>(undefined);
 export function AppFirebaseAuth({ children }: {
     children: React.ReactNode;
 }) {
-    const [user, setUser] = useState<any[]>(JSON.parse(safeLocalStorage()?.getItem('userIGRemove') || "[]"),)
+    const [user, setUser] = useState<any[]>([])
+    // const [user, setUser] = useState<any[]>(JSON.parse(safeLocalStorage()?.getItem('userIGRemove') || "[]"),)
 
-    useEffect(() => {
-        safeLocalStorage()?.setItem('userIGRemove', JSON.stringify(user));
-    }, [user]);
+    // useEffect(() => {
+    //     safeLocalStorage()?.setItem('userIGRemove', JSON.stringify(user));
+    // }, [user]);
 
     const provider = new GoogleAuthProvider();
     const signInGoogle = async () => {
