@@ -26,7 +26,7 @@ const Buttons_Login = () => {
 
     return (
         <>
-            <div className='hidden md:flex items-center gap-2 ' >
+            <div className='flex items-center gap-2 ' >
                 {
                     user.uid ?
                         <>
@@ -54,8 +54,10 @@ const Buttons_Login = () => {
                         </>
                         :
                         <>
-                            <button className='text-[var(--preto)] bg-[#f2f3f7] p-2 rounded-md font-bold' onClick={signInGoogle} >Entrar</button>
-                            <button className='text-[#f2f3f7] bg-black p-[6px] px-2 rounded-md font-bold' >Comece</button>
+                            <div className="flex items-center justify-center gap-1">
+                                <button className='text-[var(--preto)] bg-[#f2f3f7] p-2 rounded-md font-bold md:text-base text-sm' onClick={signInGoogle} >Entrar</button>
+                                <button className='text-[#f2f3f7] bg-black p-[6px] px-2 rounded-md font-bold md:text-base text-sm' >Comece</button>
+                            </div>
                         </>
                 }
             </div>

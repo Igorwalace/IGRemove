@@ -14,7 +14,7 @@ const Header = () => {
             <main className='flex items-center justify-between w-full' >
                 <Logo />
                 <Buttons_Login />
-                <div className="md:hidden">
+                <div className="hidden">
                     <button><HiOutlineMenuAlt4 size={20} /></button>
                 </div>
             </main>
