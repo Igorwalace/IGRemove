@@ -3,7 +3,6 @@ import React from 'react'
 //shadcn
 import {
     AlertDialog,
-    AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
@@ -30,7 +29,7 @@ const Modal_Check_Login = ({ setModalCheckLogin, modalCheckLogin }: Check) => {
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Voltar</AlertDialogCancel>
+                        <AlertDialogCancel className='outline-none' >Voltar</AlertDialogCancel>
                         <Login_Modal />
                     </AlertDialogFooter>
                 </AlertDialogContent>

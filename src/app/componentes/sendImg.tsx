@@ -13,7 +13,7 @@ import { IoMdAdd } from "react-icons/io";
 import Modal_Check_Login from './modal-check-login';
 
 //react
-import { useContext, useState } from 'react';
+import { useContext, useRef } from 'react';
 
 //context
 import { AppContextFirebaseAuth } from '../context/auth';
@@ -24,15 +24,20 @@ interface PropsSend {
     setSelectedFile: any
     selectedFile: any
     setProgressBoolean: any
+    modalCheckLogin: boolean
+    setModalCheckLogin: any
 }
 
-const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setProgressBoolean }: PropsSend) => {
+const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setProgressBoolean, setModalCheckLogin, modalCheckLogin }: PropsSend) => {
 
+    const fileInputRef:any | null = useRef(null);
     const { user } = useContext(AppContextFirebaseAuth)
-    const [modalCheckLogin, setModalCheckLogin] = useState<boolean>(false)
 
     const handleFileInput = (e: any) => {
         if (!user.uid) {
+            fileInputRef.current.value = null
+            setImgUrl('')
+            setSelectedFile(null)
             setModalCheckLogin(true)
             return
         }
@@ -46,6 +51,8 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
 
     const uploadFile = (file: any) => {
         if (!user.uid) {
+            setImgUrl('')
+            setSelectedFile(null)
             setModalCheckLogin(true)
             return
         }
@@ -60,7 +67,20 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
                     setProgress(progress)
                 },
                 (error) => {
-                    // Handle unsuccessful uploads
+                    switch (error.code) {
+                        case 'storage/unauthorized':
+                            // User doesn't have permission to access the object
+                            break;
+                        case 'storage/canceled':
+                            // User canceled the upload
+                            break;
+
+                        // ...
+
+                        case 'storage/unknown':
+                            // Unknown error occurred, inspect error.serverResponse
+                            break;
+                    }
                 },
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -75,7 +95,7 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
     return (
         <>
             <div className='cursor-pointer md:text-base text-sm bg-[#410cd9] rounded-md text-white font-bold space-x-2 flex items-center justify-center hover:scale-105 duration-200' >
-                <input type="file" id="fileInput" className='hidden' onChange={handleFileInput} />
+                <input type="file" id="fileInput"  ref={fileInputRef} className='hidden' onChange={handleFileInput} />
                 {
                     selectedFile ?
                         <label htmlFor="fileInput" className='p-3 py-4 cursor-pointer' >{selectedFile.name}</label>

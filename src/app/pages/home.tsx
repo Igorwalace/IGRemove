@@ -1,7 +1,7 @@
 'use client'
 
 //react
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
 
 //shadnc
@@ -9,6 +9,9 @@ import { Progress } from "@/components/ui/progress"
 
 //pages
 import SendImg from '../componentes/sendImg'
+
+//context
+import { AppContextFirebaseAuth } from '../context/auth'
 
 const Home = () => {
 
@@ -18,8 +21,19 @@ const Home = () => {
     const [loading, setLoading] = useState(false)
     const [progressBoolean, setProgressBoolean] = useState<boolean>(false)
     const [selectedFile, setSelectedFile] = useState<any>(null);
+    const [modalCheckLogin, setModalCheckLogin] = useState<boolean>(false)
+    const [isEnd, setIsEnd] = useState<boolean>(false)
+
+    const { user } = useContext(AppContextFirebaseAuth)
 
     const handleSendImage = async () => {
+        if (!user.uid) {
+            setImgUrl('')
+            setSelectedFile(null)
+            setNewImgRemove('')
+            setModalCheckLogin(true)
+            return
+        }
         setLoading(true)
         const url = 'https://background-removal.p.rapidapi.com/remove';
         const options: any = {
@@ -41,6 +55,7 @@ const Home = () => {
             const result = await response.text();
             const jsonData = JSON.parse(result)
             setNewImgRemove(jsonData.response.image_url)
+            setIsEnd(true)
         } catch (error) {
             console.error(error);
         }
@@ -75,7 +90,12 @@ const Home = () => {
                         <div className="absolute top-0 left-0 right-0 bottom-0 bg-[rgb(0,0,0,0.6)] rounded-xl">
                             <div className='w-full h-full flex items-center justify-center flex-col gap-3' >
                                 <span className="loader"></span>
-                                <h1 className='text-white' >Gerando sua imagem...</h1>
+                                {
+                                    isEnd ?
+                                        <h1 className='text-white' >Finalizando...</h1>
+                                        :
+                                        <h1 className='text-white' >Gerando sua imagem...</h1>
+                                }
                             </div>
                         </div>
                     }
@@ -87,6 +107,7 @@ const Home = () => {
                                     src={newImgRemove}
                                     onLoad={() => {
                                         setLoading(false)
+                                        setIsEnd(false)
                                     }}
                                     alt={newImgRemove}
                                     width={500}
@@ -103,6 +124,8 @@ const Home = () => {
                                         setSelectedFile={setSelectedFile}
                                         selectedFile={selectedFile}
                                         setProgressBoolean={setProgressBoolean}
+                                        setModalCheckLogin={setModalCheckLogin}
+                                        modalCheckLogin={modalCheckLogin}
                                     />
                                     <span className='text-black my-2 font-bold hidden md:block' >ou solte uma imagem</span>
                                 </div>
@@ -126,7 +149,7 @@ const Home = () => {
                     newImgRemove != '' &&
                     <div className="flex md:w-[640px] w-[95%] items-center justify-center gap-2 ">
                         <button className={`md:text-base text-sm ${loading ? 'bg-[#ccc] cursor-progress' : 'bg-[#410cd9] hover:scale-105 duration-200 cursor-pointer '} p-3 py-1 w-full rounded-md text-white font-bold flex items-center justify-center `} onClick={handleClearImage} >Nova imagem</button>
-                        <button className={`md:text-base text-sm ${loading ? 'bg-[#ccc] cursor-progress' : 'bg-[#410cd9] hover:scale-105 duration-200 cursor-pointer '} p-3 py-1 w-full rounded-md text-white font-bold flex items-center justify-center `}>Baixar imagem</button>
+                        <button className={`md:text-base text-sm ${loading ? 'bg-[#ccc] cursor-progress' : 'bg-[#410cd9] hover:scale-105 duration-200 cursor-pointer '} p-3 py-1 w-full rounded-md text-white font-bold flex items-center justify-center `} >Baixar imagem</button>
                     </div>
                 }
             </div>
