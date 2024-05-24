@@ -41,7 +41,7 @@ const Home = () => {
             method: 'POST',
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                'X-RapidAPI-Key': '0cbe71e295mshc29f96d26f6b736p18cfc3jsnab24d1c78155',
+                'X-RapidAPI-Key': '88ce9796b6mshcd708c6e95c5459p1cc167jsnf1d276e04aa1',
                 'X-RapidAPI-Host': 'background-removal.p.rapidapi.com'
             },
             body: new URLSearchParams({

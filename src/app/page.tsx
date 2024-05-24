@@ -16,7 +16,7 @@ const Page = () => {
       <div className='md:px-16 px-5 md:py-5 py-3'>
         <Home />
       </div>
-      <div className='md:px-[128px] px-5 pt-3 md:static absolute bottom-0 left-0 right-0 bg-white' >
+      <div className='md:px-[128px] px-5 pt-3 md:static fixed bottom-0 left-0 right-0 bg-white' >
         <Footer />
       </div>
 
