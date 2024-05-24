@@ -8,11 +8,7 @@ const nextConfig = {
             'localhost',
             'lh3.googleusercontent.com',
         ],
-    },
-    env: {
-        REACT_APP_API_KEY: process.env.REACT_APP_API_KEY,
-        REACT_APP_APP_ID: process.env.REACT_APP_APP_ID,
-    },
+    }
 };
 
 export default nextConfig;
