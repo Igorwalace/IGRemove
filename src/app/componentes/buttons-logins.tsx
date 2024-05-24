@@ -42,7 +42,7 @@ const Buttons_Login = () => {
                                         />
                                     </div>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent>
+                                <DropdownMenuContent className='mr-5' >
                                     <DropdownMenuLabel>Minha conta</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem className='text-center w-full flex items-center justify-center capitalize' >{user.displayName}</DropdownMenuItem>
