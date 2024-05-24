@@ -7,6 +7,9 @@ import { poppins } from "@/fonts/page";
 //css
 import "./globals.css";
 
+//context
+import { AppFirebaseAuth } from "./context/auth";
+
 
 export const metadata: Metadata = {
   title: "IGRemove",
@@ -20,7 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${poppins.className} bg-[#f2f3f7]`} suppressHydrationWarning={true} >{children}</body>
+      <head>
+        <link rel="icon" href='/icon.png' />
+      </head>
+      <body className={`${poppins.className} bg-[#f2f3f7]`} suppressHydrationWarning={true} >
+        <AppFirebaseAuth>
+          {children}
+        </AppFirebaseAuth>
+      </body>
     </html>
   );
 }

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+    outline: none;
+}
+
 .loader {
     background: white;
     width: 48px;

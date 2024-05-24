@@ -6,6 +6,18 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 //firebaseConfig
 import { storage } from '../firebase/firebaseConfig';
 
+//icons
+import { IoMdAdd } from "react-icons/io";
+
+//pages/modal
+import Modal_Check_Login from './modal-check-login';
+
+//react
+import { useContext, useState } from 'react';
+
+//context
+import { AppContextFirebaseAuth } from '../context/auth';
+
 interface PropsSend {
     setImgUrl: any
     setProgress: any
@@ -16,7 +28,14 @@ interface PropsSend {
 
 const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setProgressBoolean }: PropsSend) => {
 
+    const { user } = useContext(AppContextFirebaseAuth)
+    const [modalCheckLogin, setModalCheckLogin] = useState<boolean>(false)
+
     const handleFileInput = (e: any) => {
+        if (!user.uid) {
+            setModalCheckLogin(true)
+            return
+        }
         setProgressBoolean(true)
         const file = e.target.files[0];
         if (file) {
@@ -26,8 +45,12 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
     };
 
     const uploadFile = (file: any) => {
+        if (!user.uid) {
+            setModalCheckLogin(true)
+            return
+        }
         if (file) {
-            const storageRef = ref(storage, `imagens/${Math.floor(Math.random() * 10000)}/${file}`);
+            const storageRef = ref(storage, `imagens/${user.uid}/${file}${Math.floor(Math.random() * 10000)}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
 
             //start upload
@@ -57,9 +80,13 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
                     selectedFile ?
                         <label htmlFor="fileInput" className='p-3 py-4 cursor-pointer' >{selectedFile.name}</label>
                         :
-                        <label htmlFor="fileInput" className='p-3 py-4 cursor-pointer' >Inciar com uma Imagem</label>
+                        <label htmlFor="fileInput" className='p-3 py-4 cursor-pointer flex items-center justify-center gap-2' ><p className='bg-[rgb(0,0,0,0.2)] p-2 rounded-xl flex' ><IoMdAdd /></p> Inciar com uma Imagem</label>
                 }
             </div>
+            <Modal_Check_Login
+                setModalCheckLogin={setModalCheckLogin}
+                modalCheckLogin={modalCheckLogin}
+            />
         </>
     )
 }

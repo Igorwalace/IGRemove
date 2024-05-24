@@ -10,7 +10,7 @@ import Footer from './pages/footer'
 const Page = () => {
   return (
     <div className='' >
-      <div className='md:px-16 px-5 md:py-3 py-3 bg-white' >
+      <div className='md:px-16 px-5 md:py-3 py-3 bg-white w-full' >
         <Header />
       </div>
       <div className='md:px-16 px-5 md:py-5 py-3'>
