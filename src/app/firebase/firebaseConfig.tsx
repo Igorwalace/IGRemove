@@ -3,12 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCl2jCuUUi8sVcq6vbU3UrwAvRPn3_ccnU",
+  apiKey: process.env.API_KEY,
   authDomain: "igremove-c4a51.firebaseapp.com",
   projectId: "igremove-c4a51",
   storageBucket: "igremove-c4a51.appspot.com",
   messagingSenderId: "313706512508",
-  appId: "1:313706512508:web:96133bd5f869b28be0c9f9"
+  appId: process.env.API_ID
 };
 
 export const app = initializeApp(firebaseConfig);
