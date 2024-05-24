@@ -32,7 +32,7 @@ const Buttons_Login = () => {
                         <>
                             <DropdownMenu>
                                 <DropdownMenuTrigger>
-                                    <button className='md:w-[40px] md:h-[40px] rounded-xl'>
+                                    <div className='md:w-[40px] md:h-[40px] rounded-xl'>
                                         <Image
                                             className='rounded-xl'
                                             src={user.photoURL}
@@ -40,7 +40,7 @@ const Buttons_Login = () => {
                                             width={400}
                                             height={400}
                                         />
-                                    </button>
+                                    </div>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
                                     <DropdownMenuLabel>Minha conta</DropdownMenuLabel>

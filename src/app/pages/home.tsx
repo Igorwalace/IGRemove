@@ -12,6 +12,7 @@ import SendImg from '../componentes/sendImg'
 
 //context
 import { AppContextFirebaseAuth } from '../context/auth'
+import Link from 'next/link'
 
 const Home = () => {
 
@@ -149,7 +150,7 @@ const Home = () => {
                     newImgRemove != '' &&
                     <div className="flex md:w-[640px] w-[95%] items-center justify-center gap-2 ">
                         <button className={`md:text-base text-sm ${loading ? 'bg-[#ccc] cursor-progress' : 'bg-[#410cd9] hover:scale-105 duration-200 cursor-pointer '} p-3 py-1 w-full rounded-md text-white font-bold flex items-center justify-center `} onClick={handleClearImage} >Nova imagem</button>
-                        <button className={`md:text-base text-sm ${loading ? 'bg-[#ccc] cursor-progress' : 'bg-[#410cd9] hover:scale-105 duration-200 cursor-pointer '} p-3 py-1 w-full rounded-md text-white font-bold flex items-center justify-center `} >Baixar imagem</button>
+                        <Link className={`md:text-base text-sm ${loading ? 'bg-[#ccc] cursor-progress' : 'bg-[#410cd9] hover:scale-105 duration-200 cursor-pointer '} p-3 py-1 w-full rounded-md text-white font-bold flex items-center justify-center `} href={newImgRemove} target='_blank' download={newImgRemove} >Baixar imagem</Link>
                     </div>
                 }
             </div>
