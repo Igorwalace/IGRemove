@@ -3,6 +3,7 @@
 //react
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 //shadnc
 import { Progress } from "@/components/ui/progress"
@@ -12,7 +13,6 @@ import SendImg from '../componentes/sendImg'
 
 //context
 import { AppContextFirebaseAuth } from '../context/auth'
-import Link from 'next/link'
 
 const Home = () => {
 

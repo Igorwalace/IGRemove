@@ -13,7 +13,7 @@ import { IoMdAdd } from "react-icons/io";
 import Modal_Check_Login from './modal-check-login';
 
 //react
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 
 //context
 import { AppContextFirebaseAuth } from '../context/auth';
@@ -69,7 +69,6 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
             
             const storageRef = ref(storage, `NewImagens/${user.displayName} - ${user.uid}/${file.name} - ${h}-${min}-${s}-${mill} _ ${d}-${mes}-${y}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
-            console.log(file)
 
             //start upload
             uploadTask.on('state_changed',
