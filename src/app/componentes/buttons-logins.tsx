@@ -43,9 +43,9 @@ const Buttons_Login = () => {
                                     </div>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent className='mr-5' >
-                                    <DropdownMenuLabel>Minha conta</DropdownMenuLabel>
+                                    <DropdownMenuLabel className='flex items-center justify-center capitalize' >{user.displayName}</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuItem className='text-center w-full flex items-center justify-center capitalize' >{user.displayName}</DropdownMenuItem>
+                                    <DropdownMenuItem className='text-center w-full flex items-center justify-center' >Configurações</DropdownMenuItem>
                                     <Link href='https://meu-website-igor.vercel.app/' target='_blank' className='text-center w-full flex items-center justify-center' >Site</Link>
                                     <DropdownMenuItem className='text-center w-full flex items-center justify-center' >Suporte</DropdownMenuItem>
                                     <button className='text-center w-full flex items-center justify-center' onClick={singOutGoogle} >Sair</button>

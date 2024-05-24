@@ -26,11 +26,11 @@ interface PropsSend {
     setProgressBoolean: any
     modalCheckLogin: boolean
     setModalCheckLogin: any
+    fileInputRef:any
 }
 
-const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setProgressBoolean, setModalCheckLogin, modalCheckLogin }: PropsSend) => {
+const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setProgressBoolean, setModalCheckLogin, modalCheckLogin, fileInputRef }: PropsSend) => {
 
-    const fileInputRef:any | null = useRef(null);
     const { user } = useContext(AppContextFirebaseAuth)
 
     const handleFileInput = (e: any) => {
@@ -56,9 +56,20 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
             setModalCheckLogin(true)
             return
         }
+
         if (file) {
-            const storageRef = ref(storage, `imagens/${user.uid}/${file}${Math.floor(Math.random() * 10000)}`);
+            const date = new Date()
+            const d = date.getDay()
+            const mes = date.getMonth()
+            const y = date.getFullYear()
+            const h = date.getHours()
+            const min = date.getMinutes()
+            const s = date.getSeconds()
+            const mill = date.getMilliseconds()
+            
+            const storageRef = ref(storage, `NewImagens/${user.uid}/${file.name} - ${h}-${min}-${s}-${mill} _ ${d}-${mes}-${y}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
+            console.log(file)
 
             //start upload
             uploadTask.on('state_changed',
@@ -95,10 +106,10 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
     return (
         <>
             <div className='cursor-pointer md:text-base text-sm bg-[#410cd9] rounded-md text-white font-bold space-x-2 flex items-center justify-center hover:scale-105 duration-200' >
-                <input type="file" id="fileInput"  ref={fileInputRef} className='hidden' onChange={handleFileInput} />
+                <input type="file" id="fileInput" ref={fileInputRef} className='hidden' onChange={handleFileInput} />
                 {
                     selectedFile ?
-                        <label htmlFor="fileInput" className='p-3 py-4 cursor-pointer' >{selectedFile.name}</label>
+                        <span className='p-3 py-4' >{selectedFile.name}</span>
                         :
                         <label htmlFor="fileInput" className='p-3 py-4 cursor-pointer flex items-center justify-center gap-2' ><p className='bg-[rgb(0,0,0,0.2)] p-2 rounded-xl flex' ><IoMdAdd /></p> Inciar com uma Imagem</label>
                 }
@@ -107,6 +118,7 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
                 setModalCheckLogin={setModalCheckLogin}
                 modalCheckLogin={modalCheckLogin}
             />
+            
         </>
     )
 }

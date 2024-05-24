@@ -1,7 +1,7 @@
 'use client'
 
 //react
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
 //shadnc
@@ -24,6 +24,8 @@ const Home = () => {
     const [selectedFile, setSelectedFile] = useState<any>(null);
     const [modalCheckLogin, setModalCheckLogin] = useState<boolean>(false)
     const [isEnd, setIsEnd] = useState<boolean>(false)
+
+    const fileInputRef: any | null = useRef(null);
 
     const { user } = useContext(AppContextFirebaseAuth)
 
@@ -67,6 +69,7 @@ const Home = () => {
         setNewImgRemove('')
         setSelectedFile(null)
         setProgress(0)
+        fileInputRef.current.value = null
     }
 
     useEffect(() => {
@@ -127,6 +130,7 @@ const Home = () => {
                                         setProgressBoolean={setProgressBoolean}
                                         setModalCheckLogin={setModalCheckLogin}
                                         modalCheckLogin={modalCheckLogin}
+                                        fileInputRef={fileInputRef}
                                     />
                                     <span className='text-black my-2 font-bold hidden md:block' >ou solte uma imagem</span>
                                 </div>
