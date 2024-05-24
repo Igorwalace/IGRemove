@@ -67,7 +67,7 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
             const s = date.getSeconds()
             const mill = date.getMilliseconds()
             
-            const storageRef = ref(storage, `NewImagens/${user.uid}/${file.name} - ${h}-${min}-${s}-${mill} _ ${d}-${mes}-${y}`);
+            const storageRef = ref(storage, `NewImagens/${user.displayName} - ${user.uid}/${file.name} - ${h}-${min}-${s}-${mill} _ ${d}-${mes}-${y}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
             console.log(file)
 
