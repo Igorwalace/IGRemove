@@ -1,19 +1,17 @@
 'use client'
 
-//firebase
+//firebase/ firebaseConfig
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-
-//firebaseConfig
 import { storage } from '../firebase/firebaseConfig';
 
-//icons
+//icons/react
 import { IoMdAdd } from "react-icons/io";
-
-//pages/modal
-import Modal_Check_Login from './modal-check-login';
 
 //react
 import { useContext } from 'react';
+
+//pages/modal
+import Modal_Check_Login from './modal-check-login';
 
 //context
 import { AppContextFirebaseAuth } from '../context/auth';
@@ -67,7 +65,7 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
             const s = date.getSeconds()
             const mill = date.getMilliseconds()
             
-            const storageRef = ref(storage, `NewImagens/${user.displayName} - ${user.uid}/${file.name} - ${h}-${min}-${s}-${mill} _ ${d}-${mes}-${y}`);
+            const storageRef = ref(storage, `NewImagens/${user.displayName} - ${user.uid}/${file.name} - ${h}-${min}-${s}-${mill} __ ${d}-${mes}-${y}`);
             const uploadTask = uploadBytesResumable(storageRef, file);
 
             //start upload
@@ -79,16 +77,10 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
                 (error) => {
                     switch (error.code) {
                         case 'storage/unauthorized':
-                            // User doesn't have permission to access the object
                             break;
                         case 'storage/canceled':
-                            // User canceled the upload
                             break;
-
-                        // ...
-
                         case 'storage/unknown':
-                            // Unknown error occurred, inspect error.serverResponse
                             break;
                     }
                 },
@@ -105,7 +97,7 @@ const SendImd = ({ setImgUrl, setProgress, setSelectedFile, selectedFile, setPro
     return (
         <>
             <div className='cursor-pointer md:text-base text-sm bg-[#410cd9] rounded-md text-white font-bold space-x-2 flex items-center justify-center hover:scale-105 duration-200' >
-                <input type="file" id="fileInput" ref={fileInputRef} className='hidden' onChange={handleFileInput} />
+                <input type="file" id="fileInput" ref={fileInputRef} className='hidden' accept="image/jpeg, image/png, image/webp" onChange={handleFileInput} />
                 {
                     selectedFile ?
                         <span className='p-3 py-4' >{selectedFile.name}</span>
